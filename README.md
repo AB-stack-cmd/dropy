@@ -1,3 +1,10 @@
+# migration commands
+
+db:push
+db:migrate
+db:genrate
+custom migration integrated
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

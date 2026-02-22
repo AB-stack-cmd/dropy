@@ -1,5 +1,6 @@
 import {uuid, integer, pgTable, varchar ,text ,timestamp,boolean} from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
+import { Children } from "react";
 
 
 
@@ -46,12 +47,14 @@ export const Files = pgTable("files", {
   */
 
  // relation with files the parent and children
- //
+ //it  shows how drizzle stores files
 export const fileRelation = relations(Files,({one,many})=>({
+  // one 
   parent : one(Files,{
     fields : [Files.parentId],
     references : [Files.id]
-  })
+  }),
+  Children:many(Files)
 }))
 
 export const file = typeof Files.$inferSelect;   // type of retreving data from the db
