@@ -5,7 +5,7 @@ import { Children } from "react";
 
 
 // files
-export const Files = pgTable("files", {
+export  const Files = pgTable("files", {
   
 
   //unique id 
@@ -57,5 +57,5 @@ export const fileRelation = relations(Files,({one,many})=>({
   Children:many(Files)
 }))
 
-export const file = typeof Files.$inferSelect;   // type of retreving data from the db
+export const File = typeof Files.$inferSelect;   // type of retreving data from the db
 export const Newfile = typeof Files.$inferInsert // type of inserting data on the db
