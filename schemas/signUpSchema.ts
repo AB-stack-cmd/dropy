@@ -15,7 +15,9 @@ export const signUpSchema = z.object({
         
 
     } 
-).refine((data)=>{data.password === data.passwordConfirmation},{
+)
+// data i stge object checks password match with passwordconfirmation
+.refine((data)=>{data.password === data.passwordConfirmation},{
     message : "Password do not match",
     path:["passwordConfirmation"]
 })

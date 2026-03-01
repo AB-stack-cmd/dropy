@@ -20,6 +20,7 @@ import { Divider } from "@heroui/divider";
 import { signUpSchema } from "@/schemas/signUpSchema"
 import { error } from "node:console"
 import Link from "next/link";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 
 // CUSTOM SIGNUP FORM
@@ -36,11 +37,15 @@ export default function SignUpForm(){
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
 
+
      const { register, 
-             handleSubmit,
-             watch, 
+             handleSubmit, 
              formState: { errors } 
+             // z.infer is the input notation
+             // force the output type
             } = useForm<z.infer<typeof signUpSchema>>({
+                // automatically infers the outpuy type from the schema
+                resolver:zodResolver(signUpSchema),
                 defaultValues:{
                     email:"",
                     password:"",
@@ -55,38 +60,38 @@ export default function SignUpForm(){
     const onSubmit = async(data:z.infer<typeof signUpSchema>)=>{
         if(!isLoaded) return ;
 
-    // submission success 
-    setIsSubmitting(true);
-    setAuthError(null);
+            // submission success 
+            setIsSubmitting(true);
+            setAuthError(null);
 
-    try{
-        await signUp.create({
-            emailAddress:data.email,
-            password : data.password
-        });
-        // set verifing of otp
-        await signUp.prepareEmailAddressVerification({strategy:"email_code"});
-        setVerify(true);
-    }catch(err : any){
-        console.error("sign-up error",err);// error if any  occurs
-        setAuthError(
-            err.errors?.[0]?.message || "An error occur during sign-up. Please try again."
-        );
-    }finally{
-        setIsSubmitting(false);
-        // any error no submission
-    }     
-    };
+            try{
+                await signUp.create({
+                    emailAddress:data.email,
+                    password : data.password
+                });
+                // set verifing of otp
+                await signUp.prepareEmailAddressVerification({strategy:"email_code"});
+                setVerify(true);
+            }catch(err : any){
+                console.error("sign-up error",err);// error if any  occurs
+                setAuthError(
+                    err.errors?.[0]?.message || "An error occur during sign-up. Please try again."
+                );
+            }finally{
+                setIsSubmitting(false);
+                // any error no submission
+            }     
+            };
 
-    //handle submit verification
-    const handleVerificationSubmit = async(
-        e:React.FormEvent<HTMLFormElement>
-    )=>{
-        e.preventDefault(); // prevent to trigger any event
-        if(!isLoaded || signUp) return ;
+            //handle submit verification
+            const handleVerificationSubmit = async(
+                e:React.FormEvent<HTMLFormElement>
+            )=>{
+                e.preventDefault(); // prevent to trigger any event
+                if(!isLoaded || signUp) return ;
 
 
-    }
+        }
 
     if(verify){
          return (
@@ -173,6 +178,7 @@ export default function SignUpForm(){
       </CardHeader>
 
       <Divider />
+      <div id=""/>
 
       <CardBody className="py-6">
         {authError && (
