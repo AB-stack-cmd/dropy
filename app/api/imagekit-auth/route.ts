@@ -9,7 +9,7 @@ const imagekit = new Imagekit({
     urlEndpoint: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_URL || " "
 });
 
-export async function GET(req:NextRequest) {
+export async function GET() {
     try{
          // auth
     const {userId} = await auth()
@@ -22,7 +22,7 @@ export async function GET(req:NextRequest) {
 
     }catch(error){
         return NextResponse.json({error:"Authentication Failed for Imagekit"},{status:500});
-        
+
     }
    
 }
