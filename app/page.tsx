@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Main from "./components/main";
 import SignInPage from "./sign-in/[[...sign-in]]/page";
-import FileUploadForm from "./components/DashBoardcontent";
+import FileUploadForm from "./components/FileActionButton";
 import DropShare from "./components/main";
 import NovIDE from "./components/IDE_";
 export default function Home() {
