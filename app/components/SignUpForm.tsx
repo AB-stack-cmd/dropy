@@ -88,7 +88,7 @@ export default function SignUpForm(){
                 e:React.FormEvent<HTMLFormElement>
             )=>{
                 e.preventDefault(); // prevent to trigger any event
-                if(!isLoaded || signUp) return ;
+                if(!isLoaded || !signUp) return ;
 
 
         }
