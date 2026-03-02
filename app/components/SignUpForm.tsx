@@ -54,7 +54,7 @@ export default function SignUpForm(){
             });
    
     //handles submit 
-    // data is the input from the input
+    // data is the input from the client
     // zod schema for sign up 
     // on submit the form event
     const onSubmit = async(data:z.infer<typeof signUpSchema>)=>{
@@ -148,6 +148,8 @@ export default function SignUpForm(){
             <p className="text-sm text-default-500">
               Didn't receive a code?{" "}
               <button
+              // on click checks email and password input 
+              // if input then code pass
                 onClick={async () => {
                   if (signUp) {
                     await signUp.prepareEmailAddressVerification({

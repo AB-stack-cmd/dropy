@@ -1,3 +1,7 @@
+"use client"
+// popup model
+
+
 import React from "react";
 import {
   Modal,

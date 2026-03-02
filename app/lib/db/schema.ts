@@ -13,7 +13,6 @@ export  const Files = pgTable("files", {
 
   // filea and folder information
   name: text("name").notNull(),
-  email: text("email").notNull().unique(),
   size:integer("size").notNull(),
   type:text("type").notNull(),
   path:text("path").notNull(),
@@ -23,7 +22,7 @@ export  const Files = pgTable("files", {
 
   // File/Folder flags
   userId: text("user_Id").notNull(),//owner of the file/folder
-  parentId: uuid("parent_Id").notNull(),
+  parentId: uuid("parent_Id"),
 
   // Flags File/Folder
   isFolder : boolean("is_Folder").default(false).notNull(), // Folder true or false
