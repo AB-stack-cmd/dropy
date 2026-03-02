@@ -60,9 +60,11 @@ export async function POST(request: NextRequest){
                 message : "Folder created successfully",
                 folder : newFolder
              }
-        )
+        );
+
+      
     }catch(error){
-    return NextResponse.json(
+     return NextResponse.json(
         {error:'Failed to create a folder'},
         {status : 500}
         );
