@@ -203,7 +203,7 @@ export default function SignUpForm(){
               startContent={<Mail className="h-4 w-4 text-default-500" />}
               isInvalid={!!errors.email}
               errorMessage={errors.email?.message}
-              {...register("email")}
+              {...register("email")} // email will tranfer to zod
               className="w-full"
             />
           </div>
@@ -237,7 +237,7 @@ export default function SignUpForm(){
               }
               isInvalid={!!errors.password}
               errorMessage={errors.password?.message}
-              {...register("password")}
+              {...register("password")} // transfer to zod
               className="w-full"
             />
           </div>
