@@ -11,7 +11,7 @@ import { LucideIcon } from "lucide-react";
 
 interface ConfirmationModalProps{
     isOpen: boolean;
-    onOpenChange: (isOpen: boolean) => void;
+    onOpenChange: (isOpen: boolean) => void; // set as isOpen boolean
     title: string;
     description: string;
     icon?: LucideIcon;
@@ -41,7 +41,10 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
 }) =>{
             return(
                 <div>
-                <Modal>
+                <Modal 
+                isOpen={isOpen}
+                onOpenChange={onOpenChange}
+                >
                   <ModalContent>
                     h
 

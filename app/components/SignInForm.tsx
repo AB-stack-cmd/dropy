@@ -33,21 +33,25 @@ export default function SignInForm() {
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof signInSchema>) => {
+  const  onSubmit = async (data: z.infer<typeof signInSchema>) => {
     if (!isLoaded) return;
 
     setIsSubmitting(true);
     setAuthError(null);
 
     try {
+
+      //sends  email and pass to clerk
       const result = await signIn.create({
         identifier: data.identifier,
         password: data.password,
       });
 
+      console.log(signIn.status)
+
       if (result.status === "complete") {
         await setActive({ session: result.createdSessionId });
-        router.push("/dashboard");
+        router.push("/DashBoard");
       } else {
         console.error("Sign-in incomplete:", result);
         setAuthError("Sign-in could not be completed. Please try again.");
@@ -60,7 +64,7 @@ export default function SignInForm() {
       );
     } finally {
       setIsSubmitting(false);
-    }
+    };
   };
 
   return (
