@@ -39,7 +39,7 @@ export default function SignUpForm(){
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-    console.log("Boolean : ", isLoaded)
+    console.log("Boolean :", isLoaded)
     console.log(signUp)
 
      const { register, 
@@ -62,6 +62,7 @@ export default function SignUpForm(){
     // zod schema for sign up 
     // on submit the form event
     const onSubmit = async(data:z.infer<typeof signUpSchema>)=>{
+      console.log(signUp)
           if(!isLoaded) return ;
 
             // submission success 
@@ -296,6 +297,7 @@ export default function SignUpForm(){
             color="primary"
             className="w-full"
             isLoading={isSubmitting}
+           
           >
             {isSubmitting ? "Creating account..." : "Create Account"}
           </Button>

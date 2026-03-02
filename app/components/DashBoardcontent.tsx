@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 export async function DashBoard() {
     
     const {userId} = await auth();
+    console.log(userId)
 
     if(!userId){
         redirect("/sign-up");
