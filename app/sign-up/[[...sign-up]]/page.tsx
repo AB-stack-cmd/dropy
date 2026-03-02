@@ -3,6 +3,13 @@ import SignUpForm from "@/app/components/SignUpForm";
 import { CloudUpload } from "lucide-react";
 import { Navbar } from "@heroui/react";
 
+/**
+ * 
+ * @retuns function from SignUpPage
+ * page rendering from the page signUpForm 
+ * its a page render to ui 
+ */
+
 
 export default function SignUpPage() {
   return (

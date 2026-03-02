@@ -15,12 +15,14 @@ import { Mail, Lock, AlertCircle, Eye, EyeOff } from "lucide-react";
 import { signInSchema } from "@/schemas/signInSchema";
 
 export default function SignInForm() {
+  console.log("running...")
   const router = useRouter();
   const { signIn, isLoaded, setActive } = useSignIn();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
 
+  // form
   const {
     register,
     handleSubmit,
@@ -46,8 +48,14 @@ export default function SignInForm() {
         identifier: data.identifier,
         password: data.password,
       });
+      if(!result){
+        router.push("/sign-up")
+      };
+      
+      console.log(result);
 
-      console.log(signIn.status)
+      console.log(signIn.status);
+
 
       if (result.status === "complete") {
         await setActive({ session: result.createdSessionId });
@@ -66,6 +74,8 @@ export default function SignInForm() {
       setIsSubmitting(false);
     };
   };
+
+  
 
   return (
     <Card className="w-full max-w-md border border-default-200 bg-default-50 shadow-xl">
@@ -101,7 +111,7 @@ export default function SignInForm() {
               startContent={<Mail className="h-4 w-4 text-default-500" />}
               isInvalid={!!errors.identifier}
               errorMessage={errors.identifier?.message}
-              {...register("identifier")}
+              {...register("identifier")} //id
               className="w-full"
             />
           </div>
@@ -137,7 +147,7 @@ export default function SignInForm() {
               }
               isInvalid={!!errors.password}
               errorMessage={errors.password?.message}
-              {...register("password")}
+              {...register("password")}//id
               className="w-full"
             />
           </div>

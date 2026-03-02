@@ -25,6 +25,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 // CUSTOM SIGNUP FORM
 export default function SignUpForm(){
+
+  console.log("runningg... signUp");
+   
     const router = useRouter();
      // custom signUp Details 
     const {signUp, isLoaded, setActive} = useSignUp()
@@ -36,7 +39,8 @@ export default function SignUpForm(){
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-
+    console.log("Boolean : ", isLoaded)
+    console.log(signUp)
 
      const { register, 
              handleSubmit, 
@@ -58,11 +62,12 @@ export default function SignUpForm(){
     // zod schema for sign up 
     // on submit the form event
     const onSubmit = async(data:z.infer<typeof signUpSchema>)=>{
-        if(!isLoaded) return ;
+          if(!isLoaded) return ;
 
             // submission success 
             setIsSubmitting(true);
             setAuthError(null);
+           
 
             try{
                 await signUp.create({

@@ -16,7 +16,8 @@ export default clerkMiddleware(async(auth, req) => {
     return NextResponse.redirect(new URL("/dashboard"),req.url)
   }
   if (!isPublicRoute(req)) {
-    auth().protect(); // ✅ must call auth() first
+    
+    // auth().protect(); // ✅ must call auth() first
   }
 
   return NextResponse.next(); // ✅ must return a response

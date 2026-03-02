@@ -1,4 +1,7 @@
 import * as z from "zod"
+/**
+ * schema to check the input from the auth
+ */
 
 export const signUpSchema = z.object({
         email:z.string().min(1,{message : "Error email required"})

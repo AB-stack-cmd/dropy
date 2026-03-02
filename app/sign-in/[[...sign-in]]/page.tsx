@@ -2,6 +2,12 @@
 import SignInForm from "@/app/components/SignInForm";
 import { Navbar } from "@heroui/react";
 
+/**
+ * 
+ * @retuns function from SignInPage
+ * page rendering from the page signInForm 
+ * its a page render to ui 
+ */
 
 export default function SignInPage() {
   return (
