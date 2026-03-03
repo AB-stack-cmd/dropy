@@ -48,31 +48,37 @@ export async function POST(request: NextRequest){
 
         // insert data to db
 
-        if(parentId){
-            const [parentFolder]=await db
-            .select().from(Files).where(and(eq(Files.id,parentId), eq(Files.userId,userId),
-                                             eq(Files.isFolder,true)));
-                 
-            // Response folder                                
-            const [newFolder] = await db.insert(Files).values(folderData).returning()
+        if (parentId) {
+            const [parentFolder] = await db
+                .select()
+                .from(Files)
+                .where(
+                and(
+                    eq(Files.id, parentId),
+                    eq(Files.userId, userId),
+                    eq(Files.isFolder, true)
+                )
+                );
 
-            if(!parentFolder){
-                return NextResponse.json({error:"Parent Folder not found"},{status:400});
+            if (!parentFolder) {
+                return NextResponse.json(
+                { error: "Parent Folder not found" },
+                { status: 400 }
+                );
             };
-
-
-
+            const [newFolder] = await db.insert(Files).values(folderData).returning();
             return NextResponse.json(
             {   
                 success : true,
                 message : "Folder created successfully",
                 folder : newFolder
-             }
-        )};
-    }catch(error){
-     return NextResponse.json(
-        {error:'Failed to create a folder'},
-        {status : 500}
-        );
-    }
+             })
+            };
+            
+        }catch(error){
+            return NextResponse.json(
+                {error:'Failed to create a folder'},
+                {status : 500}
+                );
+            }
 }
