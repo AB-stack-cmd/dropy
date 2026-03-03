@@ -5,14 +5,15 @@ import FileUploadForm from "./components/FileActionButton";
 import DropShare from "./components/main";
 import NovIDE from "./components/IDE_";
 import { DashBoard } from "./components/DashBoardcontent";
+import ConfirmationModal from "./components/ui/ConfirmModel";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <div>
-       
+       <ConfirmationModal/>
         
-       <DashBoard/>
+       {/* <DashBoard/> */}
       {/* <NovIDE/> */}
       </div>
     </div>

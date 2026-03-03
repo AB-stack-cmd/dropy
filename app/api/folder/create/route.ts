@@ -3,8 +3,9 @@ import { auth } from "@clerk/nextjs/server";
 import {db} from"@/app/lib/db";
 import { Files } from "@/app/lib/db/schema";
 import { v4 as uuidv4 } from "uuid";
-import { eq, and } from "drizzle-orm";
+import { eq, and, isNotNull } from "drizzle-orm";
 import { error } from "console";
+import { string } from "zod";
 
 export async function POST(request: NextRequest){
     try{
@@ -21,7 +22,7 @@ export async function POST(request: NextRequest){
             });
         };
 
-        if (!name || typeof name !== "string" || name.trim() === "") {
+        if (!name || typeof name !== "string" || name.trim() === " ") {
             return NextResponse.json(
                 { error: "Folder name is required" },
                 { status: 400 }
@@ -36,9 +37,9 @@ export async function POST(request: NextRequest){
             size: 0,
             type: "folder",
             fileUrl: "",
-            thumbnailUrl: null,
+            thumbnailUrl:"",
             userId,
-            parentId,
+            parentId:parentId??null,
             isFolder: true,
             isStarred: false,
             isTrash: false,
@@ -49,20 +50,25 @@ export async function POST(request: NextRequest){
 
         if(parentId){
             const [parentFolder]=await db
-            .select().from(Files).where(and(eq(Files.id,parentId)))
-        };
+            .select().from(Files).where(and(eq(Files.id,parentId), eq(Files.userId,userId),
+                                             eq(Files.isFolder,true)));
+                 
+            // Response folder                                
+            const [newFolder] = await db.insert(Files).values(folderData).returning()
 
-        const [newFolder] = await db.insert(Files).values(folderData).returning()
-        
-        return NextResponse.json(
+            if(!parentFolder){
+                return NextResponse.json({error:"Parent Folder not found"},{status:400});
+            };
+
+
+
+            return NextResponse.json(
             {   
                 success : true,
                 message : "Folder created successfully",
                 folder : newFolder
              }
-        );
-
-      
+        )};
     }catch(error){
      return NextResponse.json(
         {error:'Failed to create a folder'},

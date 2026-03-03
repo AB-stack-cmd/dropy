@@ -1,4 +1,5 @@
 "use client"
+
 import {
   Mail,
   Lock,
@@ -10,7 +11,7 @@ import {
 import { Input } from "@heroui/input";
 import { Button } from "@heroui/button";
 import { useState } from "react"
-import {useForm} from  "react-hook-form"
+import {useForm , Controller} from  "react-hook-form"
 import { useSignUp } from "@clerk/nextjs"
 import { useRouter } from "next/navigation"
 import {set, z} from "zod"
@@ -21,12 +22,13 @@ import { signUpSchema } from "@/schemas/signUpSchema"
 import { error } from "node:console"
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { data } from "framer-motion/client";
 
 
 // CUSTOM SIGNUP FORM
 export default function SignUpForm(){
 
-  console.log("runningg... signUp");
+  console.log("running... signUp");
    
     const router = useRouter();
      // custom signUp Details 
@@ -61,7 +63,11 @@ export default function SignUpForm(){
     // data is the input from the input
     // zod schema for sign up 
     // on submit the form event
+    // const onSubmit = async(data:any)=>{
+    //   console.log("Data :", data)
+    // }
     const onSubmit = async(data:z.infer<typeof signUpSchema>)=>{
+      alert(JSON.stringify(data))
       console.log(signUp)
           if(!isLoaded) return ;
 

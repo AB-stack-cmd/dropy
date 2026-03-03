@@ -6,9 +6,9 @@ export async function DashBoard() {
     const {userId} = await auth();
     console.log(userId)
 
-    if(!userId){
-        redirect("/sign-up");
-    };
+    // if(!userId){
+    //     redirect("/sign-up");
+    // };
 
     return(
         <div>
