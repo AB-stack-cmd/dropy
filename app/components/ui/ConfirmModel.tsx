@@ -1,5 +1,5 @@
 "use client"
-// popup model
+// popup model compoenet 
 
 
 import React from "react";

@@ -1,5 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { CloudUpload } from "lucide-react";
 
 export async function DashBoard() {
     
@@ -13,6 +14,9 @@ export async function DashBoard() {
     return(
         <div>
             <h1>DashBoard</h1>
+            <div>
+                <CloudUpload/>
+            </div>
         </div>
     )
 
